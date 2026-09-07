@@ -11,6 +11,6 @@ class StringCalculator {
         numbers.split(*DELIMITERS).map { it.toInt() }
 
     private companion object {
-        val DELIMITERS = arrayOf(",", "\n")
+        val DELIMITERS = arrayOf(",")
     }
 }
