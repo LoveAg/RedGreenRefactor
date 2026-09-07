@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  unit-test:
+    name: JVM 유닛 테스트
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 리포지토리를 러너로 내려받는다
+      - uses: actions/checkout@v4
+
+      # 2. JDK 설치 (로컬의 JAVA_HOME 문제를 CI에서는 이렇게 해결한다)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # 3. Android SDK 라이선스 동의 (없으면 SDK 자동 다운로드가 막힌다)
+      - uses: android-actions/setup-android@v3
+
+      # 4. Gradle 캐싱 - 두 번째 실행부터 몇 분씩 빨라진다
+      - uses: gradle/actions/setup-gradle@v4
+
+      # 5. 우리가 로컬에서 치던 바로 그 명령
+      - name: 유닛 테스트 실행
+        run: ./gradlew :app:testDebugUnitTest
+
+      # 6. 실패해도(if: always) 리포트는 받아볼 수 있게 남긴다
+      - name: 테스트 리포트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: app/build/reports/tests/
