@@ -7,8 +7,7 @@ class StringCalculator {
         val parsed = parseNumbers(numbers)
 
         val negatives = parsed.filter { it < 0 }
-
-        require(negatives.isEmpty()) { "음수는 허용되지 않습니다" }
+        require(negatives.isEmpty()) { "음수는 허용되지 않습니다: $negatives" }
         return parsed.sum()
     }
 
