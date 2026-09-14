@@ -1,6 +1,8 @@
 package com.softseed.redgreenrefactor
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThrows
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class StringCalculatorTest {
@@ -30,5 +32,14 @@ class StringCalculatorTest {
     @Test
     fun `줄바꿈도 구분자로 사용할 수 있다`() {
         assertEquals(6, calculator.add("1\n2,3"))
+    }
+
+    @Test
+    fun `음수가 입력되면 예외처리를 한다`() {
+        val exception = assertThrows(IllegalArgumentException::class.java) {
+            calculator.add("-1,-2")
+        }
+        assertTrue("예외 메시지에 -2가 없습니다. 실제 메시지: ${exception.message}",
+            exception.message.orEmpty().contains("-2"))
     }
 }
