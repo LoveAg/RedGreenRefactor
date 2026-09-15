@@ -1,0 +1,12 @@
+# 소유자가 지정된 경로를 수정하면 해당 소유자의 리뷰가 자동으로 요청됩니다.
+# 아래로 갈수록 우선순위가 높습니다 (마지막에 매칭된 규칙이 이김).
+
+# 기본 소유자
+*                       @LoveAg
+
+# 빌드 설정 — 잘못 건드리면 전체 빌드가 깨지는 영역
+/app/build.gradle.kts   @LoveAg
+/gradle/                @LoveAg
+
+# CI 설정 — 보통 DevOps 팀 소유
+/.github/workflows/     @LoveAg
