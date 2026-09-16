@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Android Studio 가 계속 고쳐 쓰는 파일들
+.idea/gradle.xml
+.idea/misc.xml
