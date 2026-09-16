@@ -22,6 +22,8 @@ jobs:
 
       # 3. Android SDK 라이선스 동의 (없으면 SDK 자동 다운로드가 막힌다)
       - uses: android-actions/setup-android@v3
+        with:
+          packages: ''
 
       # 4. Gradle 캐싱 - 두 번째 실행부터 몇 분씩 빨라진다
       - uses: gradle/actions/setup-gradle@v4
